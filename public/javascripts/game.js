@@ -10,4 +10,8 @@
 
   var player;
   var cursors;
+  var moveUp;
+  var moveDown;
+  var moveRight;
+  var moveLeft;
 // }

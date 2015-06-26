@@ -11,30 +11,35 @@ var playState = {
     player.body.collideWorldBounds = true;
 
     cursors = game.input.keyboard.createCursorKeys();
+
+    moveUp = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    moveDown = game.input.keyboard.addKey(Phaser.Keyboard.S);
+    moveRight = game.input.keyboard.addKey(Phaser.Keyboard.D);
+    moveLeft = game.input.keyboard.addKey(Phaser.Keyboard.A);
   },
 
   update: function () {
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
-    if (cursors.right.isDown && cursors.up.isDown) {
+    if (moveRight.isDown && moveUp.isDown) {
       player.body.velocity.x = 300;
       player.body.velocity.y = -300;
-    } else if (cursors.right.isDown && cursors.down.isDown) {
+    } else if (moveRight.isDown && moveDown.isDown) {
       player.body.velocity.x = 300;
       player.body.velocity.y = 300;
-    } else if (cursors.left.isDown && cursors.up.isDown) {
+    } else if (moveLeft.isDown && moveUp.isDown) {
       player.body.velocity.x = -300;
       player.body.velocity.y = -300;
-    } else if (cursors.left.isDown && cursors.down.isDown) {
+    } else if (moveLeft.isDown && moveDown.isDown) {
       player.body.velocity.x = -300;
       player.body.velocity.y = 300;
-    } else if (cursors.right.isDown) {
+    } else if (moveRight.isDown) {
       player.body.velocity.x = 300;
-    } else if (cursors.down.isDown) {
+    } else if (moveDown.isDown) {
       player.body.velocity.y = 300;
-    } else if (cursors.up.isDown) {
+    } else if (moveUp.isDown) {
       player.body.velocity.y = -300;
-    } else if (cursors.left.isDown) {
+    } else if (moveLeft.isDown) {
       player.body.velocity.x = -300;
     }
 
