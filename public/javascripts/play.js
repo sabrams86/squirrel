@@ -5,8 +5,10 @@ var playState = {
 
     game.add.sprite(-300,-1600,'tree');
     player = game.add.sprite(0, 0, 'squirrel');
-
     game.physics.arcade.enable(player);
+
+    home = game.add.sprite( 300, 300, 'home');
+    game.physics.arcade.enable(home);
 
     player.body.collideWorldBounds = true;
 
@@ -19,6 +21,9 @@ var playState = {
   },
 
   update: function () {
+
+    game.physics.arcade.overlap(player, home, this.gameOver);
+
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
     if (moveRight.isDown && moveUp.isDown) {
@@ -43,5 +48,9 @@ var playState = {
       player.body.velocity.x = -300;
     }
 
+  },
+
+  gameOver: function() {
+    game.state.start('win');
   }
 }
