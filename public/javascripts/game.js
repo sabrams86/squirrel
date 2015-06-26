@@ -1,4 +1,4 @@
-// window.onload = function() {
+
   var game = new Phaser.Game(1000, 600, Phaser.AUTO, '');
   game.state.add('boot', bootState);
   game.state.add('load', loadState);
@@ -8,6 +8,8 @@
 
   game.state.start('boot');
 
+  var button;
+  var startLabel;
+  var enterKey;
   var player;
   var cursors;
-// }
