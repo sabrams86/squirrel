@@ -2,11 +2,10 @@ var menuState = {
 
   create: function () {
 
-    var nameLabel = game.add.text(80,150, 'Squirrel', {font: '30px Courier', fill: 'Blue'});
-    var startLabel = game.add.text(300,150, 'Press Enter to Start', {font: '15px Courier', fill: 'lightblue'});
-    var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+    game.add.sprite(0, 0, 'startBackground').scale.setTo(2.1,1.5);
+    this.add.button(600, 425, 'button-start', this.start, this, 1, 0, 2).scale.setTo(.7,.7);
+    enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
     enterKey.onDown.addOnce(this.start, this);
-
   },
 
   start: function () {
