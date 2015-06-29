@@ -3,11 +3,14 @@ var playState = {
   create: function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    game.add.sprite(-300,-1600,'tree');
+    //add background
+    game.add.sprite(0,0,'tree');
+    //set the boundry of the movable world
+    game.world.setBounds(0, 0, 2200, 2200);
     player = game.add.sprite(0, 0, 'squirrel');
     game.physics.arcade.enable(player);
 
-    home = game.add.sprite( 300, 300, 'home');
+    home = game.add.sprite( 1900, 1900, 'home');
     game.physics.arcade.enable(home);
 
     player.body.collideWorldBounds = true;
@@ -22,6 +25,8 @@ var playState = {
     player.animations.add('down', [5, 6, 7, 8], 15, true);
     player.animations.add('right', [9, 10, 11, 12], 15, true);
     player.animations.add('left', [13, 14, 15, 16], 15, true);
+
+    game.camera.follow(player);
   },
 
   update: function () {
