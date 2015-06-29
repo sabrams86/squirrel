@@ -17,3 +17,5 @@
   var moveDown;
   var moveRight;
   var moveLeft;
+  var acornCount = 0;
+  var acornCountText;

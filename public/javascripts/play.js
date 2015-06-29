@@ -7,11 +7,18 @@ var playState = {
     game.add.sprite(0,0,'tree');
     //set the boundry of the movable world
     game.world.setBounds(0, 0, 2200, 2200);
+    //add the player
     player = game.add.sprite(0, 0, 'squirrel');
     game.physics.arcade.enable(player);
-
+    //add the level exit
     home = game.add.sprite( 1900, 1900, 'home');
     game.physics.arcade.enable(home);
+
+    acorns = game.add.group()
+    acorns.enableBody = true;
+    for (var i = 0; i < 40; i++){
+      var acorn = acorns.create(Math.random()*2200, Math.random()*2200, 'acorn');
+    }
 
     player.body.collideWorldBounds = true;
 
@@ -27,6 +34,9 @@ var playState = {
     player.animations.add('left', [13, 14, 15, 16], 15, true);
 
     game.camera.follow(player);
+
+    acornCountText = game.add.text(16,16, '0', {fontSize: '32px', fill: 'blue'});
+    acornCountText.fixedToCamera = true;
   },
 
   update: function () {
@@ -68,9 +78,17 @@ var playState = {
       player.animations.stop();
     }
 
+    game.physics.arcade.overlap(player, acorns, this.collectAcorn)
+
   },
 
   gameOver: function() {
     game.state.start('win');
+  },
+
+  collectAcorn: function(player, acorn) {
+    acorn.kill();
+    acornCount += 1;
+    acornCountText.text = String(acornCount);
   }
 }
