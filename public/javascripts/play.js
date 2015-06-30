@@ -37,6 +37,8 @@ var playState = {
 
     acornCountText = game.add.text(16,16, '0', {fontSize: '32px', fill: 'blue'});
     acornCountText.fixedToCamera = true;
+
+    weapons.push(new Weapon.SingleBullet(this.game));
   },
 
   update: function () {
@@ -77,7 +79,24 @@ var playState = {
     else {
       player.animations.stop();
     }
-
+    //fire acorns
+    if (cursors.down.isDown && cursors.right.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 45);
+    } else if (cursors.down.isDown && cursors.left.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 135);
+    } else if (cursors.up.isDown && cursors.left.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 225);
+    } else if (cursors.up.isDown && cursors.right.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 315);
+    } else if (cursors.down.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 90);
+    } else if (cursors.right.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 0);
+    } else if (cursors.up.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 270);
+    } else if (cursors.left.isDown && acornCount > 0) {
+      weapons[currentWeapon].fire(player, 180);
+    }
     game.physics.arcade.overlap(player, acorns, this.collectAcorn)
 
   },

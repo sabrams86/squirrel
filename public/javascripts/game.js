@@ -19,3 +19,6 @@
   var moveLeft;
   var acornCount = 0;
   var acornCountText;
+  var weapons = [];
+  var currentWeapon = 0;
+  var weaponName = null;
