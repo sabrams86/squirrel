@@ -19,3 +19,5 @@
   var moveLeft;
   var acornCount = 0;
   var acornCountText;
+  var sky;
+  var barriers;
