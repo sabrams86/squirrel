@@ -4,14 +4,24 @@ var playState = {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //add background
-    game.add.sprite(0,0,'tree');
+    sky = game.add.sprite(0,0,'sky');
+    game.add.sprite(0,5820,'grass');
+    game.add.sprite(200,0,'tree');
+    game.add.sprite(1160,300,'window');
+    //add tree barriers
+    barriers = game.add.group();
+    barriers.enableBody = true;
+    var leftBar = barriers.create(200, 0, 'barrier');
+    leftBar.body.immovable = true;
+    var rightBar = barriers.create(2200, 0, 'barrier');
+    rightBar.body.immovable = true;
     //set the boundry of the movable world
-    game.world.setBounds(0, 0, 2200, 2200);
+    game.world.setBounds(0, 0, 2400, 6000);
     //add the player
-    player = game.add.sprite(0, 0, 'squirrel');
+    player = game.add.sprite(1000, 6000, 'squirrel');
     game.physics.arcade.enable(player);
     //add the level exit
-    home = game.add.sprite( 1900, 1900, 'home');
+    home = game.add.sprite( 1200, 300, 'home');
     game.physics.arcade.enable(home);
 
     acorns = game.add.group()
@@ -42,8 +52,17 @@ var playState = {
   },
 
   update: function () {
+    var scrollBackgroundX = function (background) {
+      if (background.x > 2000) {
+        background.x = -2000;
+      }
+        background.x -= .1;
+    }
+    scrollBackgroundX(sky);
+
 
     game.physics.arcade.overlap(player, home, this.gameOver);
+    game.physics.arcade.collide(player, barriers);
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;

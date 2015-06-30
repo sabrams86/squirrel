@@ -22,3 +22,5 @@
   var weapons = [];
   var currentWeapon = 0;
   var weaponName = null;
+  var sky;
+  var barriers;
