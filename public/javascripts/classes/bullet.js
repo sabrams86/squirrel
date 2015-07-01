@@ -81,6 +81,6 @@ Weapon.SingleBullet.prototype.fire = function(source, direction) {
 
   this.nextFire = this.game.time.time + this.fireRate;
   acornCount -= 1;
-  acornCountText.text = String(acornCount);
+  acornCountText.text = String("x " + acornCount);
 
 };

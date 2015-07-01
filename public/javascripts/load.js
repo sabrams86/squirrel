@@ -6,6 +6,7 @@ var loadState = {
     game.load.spritesheet('window', 'images/windows.png', 30, 30);
     game.load.image('grass', 'images/grass.png');
     game.load.image('sky', 'images/widesky.png');
+    game.load.image('cat', 'images/cat.png');
     game.load.image('barrier', 'images/barrier.png');
     game.load.image('acorn', 'images/acorn.gif');
     game.load.spritesheet('squirrel', 'images/squirrelSprite.png', 30, 50);

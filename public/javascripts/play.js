@@ -2,7 +2,9 @@ var playState = {
 
   create: function () {
     game.physics.startSystem(Phaser.Physics.ARCADE);
-
+    start = true;
+    once = true;
+    acornCount = 0;
     //add background
     sky = game.add.sprite(0,0,'sky');
     game.add.sprite(0,5820,'grass');
@@ -26,8 +28,8 @@ var playState = {
 
     acorns = game.add.group()
     acorns.enableBody = true;
-    for (var i = 0; i < 40; i++){
-      var acorn = acorns.create(Math.random()*2200, Math.random()*2200, 'acorn');
+    for (var i = 0; i < 100; i++){
+      acorn = acorns.create((Math.random()*2000) + 200, Math.random()*6000, 'acorn');
     }
 
     player.body.collideWorldBounds = true;
@@ -45,8 +47,13 @@ var playState = {
 
     game.camera.follow(player);
 
-    acornCountText = game.add.text(16,16, '0', {fontSize: '32px', fill: 'blue'});
+    // Point display
+    timer = game.time.create();
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND * 1, this.endTimer, this);
+    acornCountText = game.add.text(42,20, "x " + acornCount, {fontSize: '15px', fill: 'darkorange'});
     acornCountText.fixedToCamera = true;
+    var acorn = game.add.sprite(20, 20,'acorn');
+    acorn.fixedToCamera = true;
 
     weapons.push(new Weapon.SingleBullet(this.game));
   },
@@ -61,7 +68,7 @@ var playState = {
     scrollBackgroundX(sky);
 
 
-    game.physics.arcade.overlap(player, home, this.gameOver);
+    game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
 
     player.body.velocity.x = 0;
@@ -118,15 +125,42 @@ var playState = {
     }
     game.physics.arcade.overlap(player, acorns, this.collectAcorn)
 
+    game.physics.arcade.overlap(player, cat, this.gameOver);
+
+    // timer and time over
+    if (start) {
+      timer.start();
+      updateTimer();
+    }
+    if (seconds === "00" && minutes == "00") {
+      timer.stop();
+      start = false;
+      // add death cat
+      if (once) {
+        once = false;
+        this.cat()
+      }
+    }
+  },
+
+  cat: function () {
+    cat = game.add.sprite(game.camera.x - 300, game.camera.y -200, 'cat');
+    cat.enableBody = true;
+    game.physics.arcade.enable(cat);
+    game.physics.arcade.moveToObject(cat, player, 1700);
   },
 
   gameOver: function() {
+    game.state.start('lose');
+  },
+
+  win: function() {
     game.state.start('win');
   },
 
   collectAcorn: function(player, acorn) {
     acorn.kill();
     acornCount += 1;
-    acornCountText.text = String(acornCount);
+    acornCountText.text = String("x " + acornCount);
   }
 }

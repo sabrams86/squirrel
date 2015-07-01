@@ -5,6 +5,7 @@
   game.state.add('menu', menuState);
   game.state.add('play', playState);
   game.state.add('win', winState);
+  game.state.add('lose', loseState);
 
   game.state.start('boot');
 
@@ -24,3 +25,14 @@
   var weaponName = null;
   var sky;
   var barriers;
+  var timer;
+  var timerEvent;
+  var milliseconds = 0;
+  var seconds;
+  var minutes;
+  var gameover = false;
+  var totalScore;
+  var acorn;
+  var cat;
+  var start = true;
+  var once = true;
