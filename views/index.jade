@@ -1,1 +1,76 @@
 extends layout
+
+block content
+  .header
+    .title
+      h1 Squirrel
+    .login
+      a.btn-lg.btn-warning.btn.btn-launch(href='javascript:;', data-toggle='modal', data-target='#loginModal') Sign In
+  #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content.login-modal
+        .modal-header.login-modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#loginModalLabel.modal-title.text-center WELCOME!
+        .modal-body
+          .text-center
+            .login-tab(role='tabpanel')
+              ul.nav.nav-tabs(role='tablist')
+                li.active(role='presentation')
+                  a#signin-taba(href='#home', aria-controls='home', role='tab', data-toggle='tab') Sign In
+                li(role='presentation')
+                  a#signup-taba(href='#profile', aria-controls='profile', role='tab', data-toggle='tab') Sign Up
+              .tab-content
+                #home.tab-pane.active.text-center(role='tabpanel')
+                  span#login_fail.response_error(style='display: none;') Loggin failed, please try again.
+                  .clearfix
+                  form(action="", method="post")
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-user
+                        input#login_username.form-control(type='text', name="username", placeholder='Username')
+                      span#email-error.help-block.has-error
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#password.form-control(type='password', name="password", placeholder='Password')
+                      span#password-error.help-block.has-error
+                    button#login_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Signing In....') Login
+                #profile.tab-pane(role='tabpanel')
+                  span#registration_fail.response_error(style='display: none;') Registration failed, please try again.
+                  .clearfix
+                  form(action="", method="post")
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-user
+                        input#username.form-control(type='text', name="username" placeholder='Username')
+                      span#username-error.help-block.has-error(data-error='0')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-at
+                        input#remail.form-control(type='text', name="email" placeholder='Email')
+                      span#remail-error.help-block.has-error(data-error='0')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#password.form-control(type='password', name="password", placeholder='Password')
+                      span#password-error.help-block.has-error
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#password.form-control(type='password', name="confirmation" placeholder='Confirm Password')
+                      span#password-error.help-block.has-error
+                    button#register_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Registering....') Register
+  .siterows
+    #game
+  .siterows
+    .buttons
+      input.button.btn-lg(type ="submit",value="High Scores")
+      input.button.btn-lg(type ="submit",value="My Scores")
