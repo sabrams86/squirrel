@@ -30,6 +30,7 @@ var playState = {
     acorns.enableBody = true;
     for (var i = 0; i < 40; i++){
       var acorn = acorns.create(Math.random()*2000+200, Math.random()*2200, 'acorn');
+    }
     for (var i = 0; i < 100; i++){
       acorn = acorns.create((Math.random()*2000) + 200, Math.random()*6000, 'acorn');
     }
@@ -88,11 +89,11 @@ var playState = {
     dropApple(badapples);
     if(appleTimer < game.time.now || appleTimer === 0){
       this.releaseApples();
-      console.log(appleTimer);
-      console.log(game.time.now);
     }
     game.physics.arcade.overlap(player, home, this.gameOver);
-    game.physics.arcade.overlap(player, badapples, this.gameOver);
+    game.physics.arcade.overlap(player, badapples, function () {
+      console.log('apple');
+    });
     game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
 
@@ -169,7 +170,7 @@ var playState = {
   },
 
   cat: function () {
-    cat = game.add.sprite(game.camera.x - 300, game.camera.y -200, 'cat');
+    cat = game.add.sprite(game.camera.x - 300, game.camera.y - 200, 'cat');
     cat.enableBody = true;
     game.physics.arcade.enable(cat);
     game.physics.arcade.moveToObject(cat, player, 1700);
@@ -195,6 +196,5 @@ var playState = {
       }
     appleTotal += 10;
     appleTimer = game.time.now + 4000;
-    acornCountText.text = String("x " + acornCount);
   }
 }
