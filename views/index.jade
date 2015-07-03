@@ -5,7 +5,9 @@ block content
     .title
       h1 Squirrel
     .login
-      a.btn-lg.btn-warning.btn.btn-launch(href='javascript:;', data-toggle='modal', data-target='#loginModal') Sign In
+      a.btn-lg.btn-warning.btn.btn-launch(data-toggle='modal', data-target='#loginModal') Sign In
+    form(action="/logout", method="post")
+      input.logout.btn-lg.btn-warning.btn(type="submit", value="Log Out")
   #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel', aria-hidden='true')
     .modal-dialog
       .modal-content.login-modal
@@ -23,51 +25,47 @@ block content
                   a#signup-taba(href='#profile', aria-controls='profile', role='tab', data-toggle='tab') Sign Up
               .tab-content
                 #home.tab-pane.active.text-center(role='tabpanel')
-                  span#login_fail.response_error(style='display: none;') Loggin failed, please try again.
+                  .errorLogin
+                    if error
+                      = error
                   .clearfix
-                  form(action="", method="post")
+                  form(action="/", method="post")
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-user
                         input#login_username.form-control(type='text', name="username", placeholder='Username')
-                      span#email-error.help-block.has-error
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-lock
-                        input#password.form-control(type='password', name="password", placeholder='Password')
-                      span#password-error.help-block.has-error
+                        input#login_password.form-control(type='password', name="password", placeholder='Password')
                     button#login_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Signing In....') Login
                 #profile.tab-pane(role='tabpanel')
-                  span#registration_fail.response_error(style='display: none;') Registration failed, please try again.
+                  .errorSignup
                   .clearfix
-                  form(action="", method="post")
+                  form(action="/signup", method="post")
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-user
-                        input#username.form-control(type='text', name="username" placeholder='Username')
-                      span#username-error.help-block.has-error(data-error='0')
+                        input#signup_username.form-control(type='text', name="username" placeholder='Username')
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-at
-                        input#remail.form-control(type='text', name="email" placeholder='Email')
-                      span#remail-error.help-block.has-error(data-error='0')
+                        input#signup_email.form-control(type='text', name="email" placeholder='Email')
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-lock
-                        input#password.form-control(type='password', name="password", placeholder='Password')
-                      span#password-error.help-block.has-error
+                        input#signup_password.form-control(type='password', name="password", placeholder='Password')
                     .form-group
                       .input-group
                         .input-group-addon
                           i.fa.fa-lock
                         input#password.form-control(type='password', name="confirmation" placeholder='Confirm Password')
-                      span#password-error.help-block.has-error
-                    button#register_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Registering....') Register
+                    button#signup_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Registering....') Register
   .siterows
     #game
   .siterows
