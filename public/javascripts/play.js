@@ -35,16 +35,6 @@ var playState = {
       acorn = acorns.create((Math.random()*2000) + 200, Math.random()*6000, 'acorn');
     }
 
-    goodapples = game.add.group();
-    goodapples.enableBody = true;
-    for (var i = 0; i < 40; i++){
-      var goodapple = goodapples.create(Math.random()*2000+200, Math.random()*6000, 'greenapple').scale.setTo(.25,.25);
-    }
-
-    badapples = game.add.group();
-    badapples.enableBody = true;
-
-
     player.body.collideWorldBounds = true;
 
     cursors = game.input.keyboard.createCursorKeys();
@@ -69,11 +59,11 @@ var playState = {
     acorn.fixedToCamera = true;
 
     weapons.push(new Weapon.SingleBullet(this.game));
+
+    this.releaseApple();
   },
 
   update: function () {
-    game.physics.arcade.collide(player, goodapples);
-    game.physics.arcade.collide(goodapples, badapples);
 
     var scrollBackgroundX = function (background) {
       if (background.x > 2000) {
@@ -83,17 +73,7 @@ var playState = {
     }
     scrollBackgroundX(sky);
 
-    var dropApple = function (apple) {
-        apple.y += 5;
-    }
-    dropApple(badapples);
-    if(appleTimer < game.time.now || appleTimer === 0){
-      this.releaseApples();
-    }
     game.physics.arcade.overlap(player, home, this.gameOver);
-    game.physics.arcade.overlap(player, badapples, function () {
-      console.log('apple');
-    });
     game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
 
@@ -150,8 +130,13 @@ var playState = {
       weapons[currentWeapon].fire(player, 180);
     }
     game.physics.arcade.overlap(player, acorns, this.collectAcorn)
-
     game.physics.arcade.overlap(player, cat, this.gameOver);
+
+    if (game.time.now > appleTimer)
+    {
+        this.releaseApple();
+    }
+    game.physics.arcade.overlap(player, apple, this.gameOver);
 
     // timer and time over
     if (start) {
@@ -189,12 +174,27 @@ var playState = {
     acornCount += 1;
     acornCountText.text = String(acornCount);
   },
-  releaseApples: function(){
-      for (var i = 0; i < 6; i ++){
-        var badapple = badapples.create(0, 0, 'redapple');
-        badapple.scale.setTo(.25,.25);
-      }
-    appleTotal += 10;
-    appleTimer = game.time.now + 4000;
+
+  releaseApple: function() {
+
+    apple = game.add.sprite(game.world.randomX, 0 , 'redApple');
+
+    apple.checkWorldBounds = true;
+    apple.outOfBoundsKill = true;
+    apple.scale.setTo(.25, .25);
+    apple.checkWorldBounds = true;
+    apple.outOfBoundsKill = true;
+    //  If you prefer to work in degrees rather than radians then you can use Phaser.Sprite.angle
+    //  otherwise use Phaser.Sprite.rotation
+    // apple.rotation = game.rnd.angle();
+    game.physics.arcade.enable(apple);
+
+
+    game.add.tween(apple).to({ y: 6600 }, 10000, Phaser.Easing.Linear.None, true);
+
+    appleTotal++;
+    appleTimer = game.time.now + 500;
+
   }
+
 }

@@ -13,7 +13,7 @@ var loadState = {
     game.load.image('home', 'images/woodendoor.png');
     game.load.spritesheet('button-start', 'images/button-start.png', 401, 143);
     game.load.image('startBackground', 'images/start_background.png');
-    game.load.image('redapple', 'images/redapple.png');
+    game.load.image('redApple', 'images/redapple.png');
     game.load.image('greenapple', 'images/greenapple.png');
     for (var i = 1; i <= 11; i++) {
       game.load.image('bullet', 'images/acorn.gif');

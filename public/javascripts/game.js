@@ -25,11 +25,9 @@
   var weaponName = null;
   var sky;
   var barriers;
-  var badapples;
-  var goodapples;
-  var appleCheck = true;
-  var appleTotal = 0;
+  var apple;
   var appleTimer = 0;
+  var appleTotal = 0;
   var timer;
   var timerEvent;
   var milliseconds = 0;
