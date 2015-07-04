@@ -39,3 +39,4 @@
   var cat;
   var start = true;
   var once = true;
+  var apples;

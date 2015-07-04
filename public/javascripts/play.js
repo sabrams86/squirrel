@@ -26,6 +26,9 @@ var playState = {
     home = game.add.sprite( 1200, 300, 'home');
     game.physics.arcade.enable(home);
 
+    apples = game.add.group();
+    apples.enableBody = true;
+
     acorns = game.add.group();
     acorns.enableBody = true;
     for (var i = 0; i < 40; i++){
@@ -131,12 +134,12 @@ var playState = {
     }
     game.physics.arcade.overlap(player, acorns, this.collectAcorn)
     game.physics.arcade.overlap(player, cat, this.gameOver);
+    game.physics.arcade.overlap(player, apples, this.gameOver);
 
     if (game.time.now > appleTimer)
     {
         this.releaseApple();
     }
-    game.physics.arcade.overlap(player, apple, this.gameOver);
 
     // timer and time over
     if (start) {
@@ -177,7 +180,8 @@ var playState = {
 
   releaseApple: function() {
 
-    apple = game.add.sprite(game.world.randomX, 0 , 'redApple');
+    apple = apples.create(game.world.randomX, 0 , 'redApple');
+    game.physics.arcade.enable(apple);
 
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
@@ -187,7 +191,6 @@ var playState = {
     //  If you prefer to work in degrees rather than radians then you can use Phaser.Sprite.angle
     //  otherwise use Phaser.Sprite.rotation
     // apple.rotation = game.rnd.angle();
-    game.physics.arcade.enable(apple);
 
 
     game.add.tween(apple).to({ y: 6600 }, 10000, Phaser.Easing.Linear.None, true);
