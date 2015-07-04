@@ -26,8 +26,8 @@ block content
               .tab-content
                 #home.tab-pane.active.text-center(role='tabpanel')
                   .errorLogin
-                    if error
-                      = error
+                    if errorLogin
+                      = errorLogin
                   .clearfix
                   form(action="/", method="post")
                     .form-group
@@ -43,6 +43,8 @@ block content
                     button#login_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Signing In....') Login
                 #profile.tab-pane(role='tabpanel')
                   .errorSignup
+                    if errorSignup
+                      =errorSignup
                   .clearfix
                   form(action="/signup", method="post")
                     .form-group
@@ -64,11 +66,11 @@ block content
                       .input-group
                         .input-group-addon
                           i.fa.fa-lock
-                        input#password.form-control(type='password', name="confirmation" placeholder='Confirm Password')
+                        input#signup_confirmation.form-control(type='password', name="confirmation" placeholder='Confirm Password')
                     button#signup_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Registering....') Register
   .siterows
     #game
   .siterows
     .buttons
-      input.button.btn-lg(type ="submit",value="High Scores")
-      input.button.btn-lg(type ="submit",value="My Scores")
+      input.highScores.btn-lg(type ="submit",value="High Scores")
+      input.myScore.btn-lg(type ="submit",value="My Scores")

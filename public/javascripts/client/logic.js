@@ -29,4 +29,19 @@ error.prototype.validateInput = function (input, label) {
   }
 };
 
+error.prototype.validateEmail = function (input) {
+  if (input.trim().length === 0) {
+    this.errorsArr.push('please enter a valid email')
+  }
+  else if (input.indexOf('@') < 0) {
+    this.errorsArr.push('Invalid email')
+  }
+  else if (input.trim().length > 30) {
+    this.errorsArr.push('email is too long. Make it less than 30 charecters.')
+  }
+  else if (input.trim().length < 3) {
+    this.errorsArr.push('email is too short. Make it more than 3 characters')
+  }
+};
+
 var error = new error;

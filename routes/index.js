@@ -10,19 +10,33 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', function (req, res, next) {
-  var hash = bcrypt.hashSync(req.body.password, 8);
-  var username = req.body.username;
-  var email = req.body.email;
-  squirrel.insert({username: username, email: email, password: hash});
-  res.cookie('username', username);
-  res.redirect('/');
+  var username = req.body.username.toLowerCase();
+  var email = req.body.email.toLowerCase();
+  squirrel.findOne({username: username}, function (err, data) {
+    if (data === null) {
+      squirrel.findOne({email: email}, function (err, result) {
+        if (result === null) {
+          var hash = bcrypt.hashSync(req.body.password, 8);
+          squirrel.insert({username: username, email: email, password: hash});
+          res.cookie('username', username);
+          res.redirect('/');
+        }
+        else {
+          res.render('index', {errorSignup: 'email already exist'});
+        }
+      });
+    }
+    else {
+      res.render('index', {errorSignup: 'username already exist'});
+    }
+  });
 });
 
 router.post('/', function (req, res, next) {
-  var username = req.body.username;
+  var username = req.body.username.toLowerCase();
   squirrel.findOne({username: username}, function (err, data) {
-    if (data === undefined) {
-      res.render('index', {error: 'username does not exist'});
+    if (data === null) {
+      res.render('index', {errorLogin: 'username does not exist'});
     }
     else {
       var password = req.body.password;
@@ -31,9 +45,7 @@ router.post('/', function (req, res, next) {
         res.redirect('/');
       }
       else {
-        console.log(data.password);
-        console.log(req.body.password);
-        res.render('index', {error: 'incorrect password'});
+        res.render('index', {errorLogin: 'incorrect password'});
       }
     }
   });

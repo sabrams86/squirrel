@@ -4,7 +4,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-h1 {
+h1, .title {
   display: inline-block;
 }
 
@@ -101,9 +101,15 @@ form {
   margin-right: 37%;
 }
 
-.button {
+.highScores {
   display: inline-block;
   margin: 5%;
+}
+
+.myScore {
+  display: inline-block;
+  margin: 5%;
+  visibility: hidden;
 }
 
 .errorLogin, .errorSignup {
