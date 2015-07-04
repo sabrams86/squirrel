@@ -28,6 +28,7 @@
   var apple;
   var appleTimer = 0;
   var appleTotal = 0;
+  var birdTotal = 0;
   var timer;
   var timerEvent;
   var milliseconds = 0;
@@ -40,3 +41,4 @@
   var start = true;
   var once = true;
   var apples;
+  var birds;
