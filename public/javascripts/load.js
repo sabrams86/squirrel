@@ -16,6 +16,7 @@ var loadState = {
     game.load.image('redApple', 'images/redapple.png');
     game.load.image('greenApple', 'images/greenapple.png');
     game.load.image('bird', 'images/bird.png');
+    game.load.image('bird2', 'images/bird2.png');
     for (var i = 1; i <= 11; i++) {
       game.load.image('bullet', 'images/acorn.gif');
     }

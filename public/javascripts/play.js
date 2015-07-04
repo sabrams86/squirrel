@@ -83,7 +83,7 @@ var playState = {
     game.physics.arcade.overlap(player, home, this.gameOver);
     game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
-    // game.physics.arcade.collide(weapon, birds);
+    game.physics.arcade.collide(Bullet, birds);
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -206,7 +206,9 @@ var playState = {
   releaseBird: function() {
 
     bird = birds.create(0, game.world.randomY , 'bird');
-    game.physics.arcade.enable(apple);
+    bird2 = birds.create(2200, game.world.randomY , 'bird2');
+    game.physics.arcade.enable(bird);
+    game.physics.arcade.enable(bird2);
 
     bird.checkWorldBounds = true;
     bird.outOfBoundsKill = true;
@@ -214,7 +216,15 @@ var playState = {
     bird.checkWorldBounds = true;
     bird.outOfBoundsKill = true;
 
-    game.add.tween(apple).to({ x: 2500 }, 10000, Phaser.Easing.Linear.None, true);
+    bird2.checkWorldBounds = true;
+    bird2.outOfBoundsKill = true;
+    bird2.scale.setTo(.10, .10);
+    bird2.checkWorldBounds = true;
+    bird2.outOfBoundsKill = true;
+
+
+    game.add.tween(bird).to({ x: 2400 }, 10000, Phaser.Easing.Linear.None, true);
+    game.add.tween(bird2).to({ x: -300 }, 10000, Phaser.Easing.Linear.None, true);
 
     birdTotal++;
 
