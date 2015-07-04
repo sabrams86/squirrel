@@ -1,1 +1,76 @@
 extends layout
+
+block content
+  .header
+    .title
+      h1 Squirrel
+    .login
+      a.btn-lg.btn-warning.btn.btn-launch(data-toggle='modal', data-target='#loginModal') Sign In
+    form(action="/logout", method="post")
+      input.logout.btn-lg.btn-warning.btn(type="submit", value="Log Out")
+  #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content.login-modal
+        .modal-header.login-modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+          h4#loginModalLabel.modal-title.text-center WELCOME!
+        .modal-body
+          .text-center
+            .login-tab(role='tabpanel')
+              ul.nav.nav-tabs(role='tablist')
+                li.active(role='presentation')
+                  a#signin-taba(href='#home', aria-controls='home', role='tab', data-toggle='tab') Sign In
+                li(role='presentation')
+                  a#signup-taba(href='#profile', aria-controls='profile', role='tab', data-toggle='tab') Sign Up
+              .tab-content
+                #home.tab-pane.active.text-center(role='tabpanel')
+                  .errorLogin
+                    if errorLogin
+                      = errorLogin
+                  .clearfix
+                  form(action="/", method="post")
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-user
+                        input#login_username.form-control(type='text', name="username", placeholder='Username')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#login_password.form-control(type='password', name="password", placeholder='Password')
+                    button#login_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Signing In....') Login
+                #profile.tab-pane(role='tabpanel')
+                  .errorSignup
+                    if errorSignup
+                      =errorSignup
+                  .clearfix
+                  form(action="/signup", method="post")
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-user
+                        input#signup_username.form-control(type='text', name="username" placeholder='Username')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-at
+                        input#signup_email.form-control(type='text', name="email" placeholder='Email')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#signup_password.form-control(type='password', name="password", placeholder='Password')
+                    .form-group
+                      .input-group
+                        .input-group-addon
+                          i.fa.fa-lock
+                        input#signup_confirmation.form-control(type='password', name="confirmation" placeholder='Confirm Password')
+                    button#signup_btn.btn.btn-block.bt-login(type='submit', data-loading-text='Registering....') Register
+  .siterows
+    #game
+  .siterows
+    .buttons
+      input.highScores.btn-lg(type ="submit",value="High Scores")
+      input.myScore.btn-lg(type ="submit",value="My Scores")

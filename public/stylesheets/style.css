@@ -1,9 +1,120 @@
 body {
-  padding: 0;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+h1, .title {
+  display: inline-block;
+}
+
+a:link {
+  text-decoration: none;
+  color: brown;
+}
+
+canvas {
+  margin: auto;
+  display: block;
+}
+
+form {
+  display: inline;
+}
+
+.bt-login,.bt-login:hover, .bt-login:active, .bt-login:focus {
+    background-color: #ff8627;
+    color: #ffffff;
+    transition: background-color 300ms linear 0s;
+}
+
+.login-tab {
+	margin: 0 auto;
+	max-width: 380px;
+}
+
+.login-modal-header {
+	background: brown;
+	color: #fff;
+}
+
+.login-modal-header .modal-title {
+	color: #fff;
+}
+
+.login-modal-header .close {
+	color: #fff;
+}
+
+.login-modal i {
+	color: #000;
+}
+
+.login-modal form {
+	max-width: 340px;
+}
+
+.tab-pane form {
+	margin: 0 auto;
+  margin-top: 4%;
+}
+.login-modal-footer{
+	margin-top:15px;
+	margin-bottom:15px;
+}
+.siterows, .header {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1%;
+}
+
+.header {
+  background: #F6511D;
+  color: white;
+  padding-top: 0;
+  border-bottom: solid 2px grey;
+}
+
+.title {
+  display: inline-block;
+  margin-left: 3%;
+}
+
+.login {
+  display: inline-block;
+  float: right;
+  margin-top: 1.3%;
+  margin-right: 2%;
+}
+
+.logout {
+  display: inline-block;
+  margin-top: 1.3%;
+  visibility: hidden;
+  float: right;
+}
+
+.buttons {
+  margin-top: 1%;
+  margin-left: 37%;
+  margin-right: 37%;
+}
+
+.highScores {
+  display: inline-block;
+  margin: 5%;
+}
+
+.myScore {
+  display: inline-block;
+  margin: 5%;
+  visibility: hidden;
+}
+
+.errorLogin, .errorSignup {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  color: red;
+  text-align: left;
 }
