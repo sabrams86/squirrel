@@ -29,6 +29,9 @@ var playState = {
     apples = game.add.group();
     apples.enableBody = true;
 
+    birds = game.add.group();
+    birds.enableBody = true;
+
     acorns = game.add.group();
     acorns.enableBody = true;
     for (var i = 0; i < 40; i++){
@@ -64,6 +67,7 @@ var playState = {
     weapons.push(new Weapon.SingleBullet(this.game));
 
     this.releaseApple();
+    this.releaseBird();
   },
 
   update: function () {
@@ -79,6 +83,7 @@ var playState = {
     game.physics.arcade.overlap(player, home, this.gameOver);
     game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
+    // game.physics.arcade.collide(weapon, birds);
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -135,10 +140,12 @@ var playState = {
     game.physics.arcade.overlap(player, acorns, this.collectAcorn)
     game.physics.arcade.overlap(player, cat, this.gameOver);
     game.physics.arcade.overlap(player, apples, this.gameOver);
+    game.physics.arcade.overlap(player, birds, this.gameOver);
 
     if (game.time.now > appleTimer)
     {
         this.releaseApple();
+        this.releaseBird();
     }
 
     // timer and time over
@@ -188,16 +195,29 @@ var playState = {
     apple.scale.setTo(.25, .25);
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
-    //  If you prefer to work in degrees rather than radians then you can use Phaser.Sprite.angle
-    //  otherwise use Phaser.Sprite.rotation
-    // apple.rotation = game.rnd.angle();
-
 
     game.add.tween(apple).to({ y: 6600 }, 10000, Phaser.Easing.Linear.None, true);
 
     appleTotal++;
     appleTimer = game.time.now + 500;
 
-  }
+  },
+
+  releaseBird: function() {
+
+    bird = birds.create(0, game.world.randomY , 'bird');
+    game.physics.arcade.enable(apple);
+
+    bird.checkWorldBounds = true;
+    bird.outOfBoundsKill = true;
+    bird.scale.setTo(.10, .10);
+    bird.checkWorldBounds = true;
+    bird.outOfBoundsKill = true;
+
+    game.add.tween(apple).to({ x: 2500 }, 10000, Phaser.Easing.Linear.None, true);
+
+    birdTotal++;
+
+  },
 
 }
