@@ -58,7 +58,7 @@ var playState = {
 
     // Point display
     timer = game.time.create();
-    timerEvent = timer.add(Phaser.Timer.MINUTE * 2 + Phaser.Timer.SECOND * 2, this.endTimer, this);
+    timerEvent = timer.add(Phaser.Timer.MINUTE * .5 + Phaser.Timer.SECOND * 1, this.endTimer, this);
     acornCountText = game.add.text(42,20, "x " + acornCount, {fontSize: '15px', fill: 'darkorange'});
     acornCountText.fixedToCamera = true;
     var acorn = game.add.sprite(20, 20,'acorn');
@@ -198,11 +198,11 @@ var playState = {
 
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
-    apple.scale.setTo(.25, .25);
+    apple.scale.setTo(.05, .05);
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
 
-    game.add.tween(apple).to({ y: 6600 }, 10, Phaser.Easing.Linear.None, true);
+    game.add.tween(apple).to({ y: 6600 }, 12000, Phaser.Easing.Linear.None, true);
 
     appleTotal++;
     appleTimer = game.time.now + 500;
@@ -218,13 +218,13 @@ var playState = {
 
     bird.checkWorldBounds = true;
     bird.outOfBoundsKill = true;
-    bird.scale.setTo(.10, .10);
+    bird.scale.setTo(.05, .05);
     bird.checkWorldBounds = true;
     bird.outOfBoundsKill = true;
 
     bird2.checkWorldBounds = true;
     bird2.outOfBoundsKill = true;
-    bird2.scale.setTo(.10, .10);
+    bird2.scale.setTo(.05, .05);
     bird2.checkWorldBounds = true;
     bird2.outOfBoundsKill = true;
 
