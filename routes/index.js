@@ -6,7 +6,14 @@ var squirrel = db.get('users');
 var bcrypt = require('bcryptjs');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Squirrel' });
+  if (req.cookies.username !== undefined) {
+    squirrel.findOne({username: req.cookies.username}, function (err, data) {
+    res.render('index', { title: 'Squirrel', scores: data.scores });
+    })
+  }
+  else {
+    res.render('index', { title: 'Squirrel' });
+  }
 });
 
 router.post('/signup', function (req, res, next) {
@@ -54,6 +61,11 @@ router.post('/', function (req, res, next) {
 router.post('/logout', function (req, res, next) {
   res.clearCookie('username');
   res.redirect('/');
-})
+});
+
+router.post('/score', function (req, res, next) {
+  squirrel.update({username: req.cookies.username}, {$push: {scores: {score: req.body.score, time: req.body.time, acorns: req.body.acorns}}})
+  res.redirect('/');
+});
 
 module.exports = router;

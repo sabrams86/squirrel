@@ -56,5 +56,14 @@ $(document).ready(function(){
       $('.errorSignup').html(logArray(error.errorsArr));
       e.preventDefault();
     }
-  })
+  });
+  $(document).on('click','.myScore',function(e){
+    if ($('.myTable').css('visibility') === "hidden") {
+      $('.myTable').css('visibility', 'visible');
+    }
+    else {
+      $('.myTable').css('visibility', 'hidden');
+    }
+    e.preventDefault();
+  });
 });

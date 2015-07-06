@@ -74,3 +74,19 @@ block content
     .buttons
       input.highScores.btn-lg(type ="submit",value="High Scores")
       input.myScore.btn-lg(type ="submit",value="My Scores")
+  .tables.siterows
+    .highTable
+    .myTable
+      if scores
+        table
+          thead
+            tr
+              th Score
+              th Time
+              th Acorns
+          tbody
+            for score in scores
+              tr
+                td=score.score 
+                td=score.time 
+                td=score.acorns 

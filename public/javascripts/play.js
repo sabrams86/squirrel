@@ -58,7 +58,7 @@ var playState = {
 
     // Point display
     timer = game.time.create();
-    timerEvent = timer.add(Phaser.Timer.MINUTE * 1 + Phaser.Timer.SECOND * 1, this.endTimer, this);
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 2 + Phaser.Timer.SECOND * 2, this.endTimer, this);
     acornCountText = game.add.text(42,20, "x " + acornCount, {fontSize: '15px', fill: 'darkorange'});
     acornCountText.fixedToCamera = true;
     var acorn = game.add.sprite(20, 20,'acorn');
@@ -137,10 +137,11 @@ var playState = {
     } else if (cursors.left.isDown && acornCount > 0) {
       weapons[currentWeapon].fire(player, 180);
     }
-    game.physics.arcade.overlap(player, acorns, this.collectAcorn)
+    game.physics.arcade.overlap(player, acorns, this.collectAcorn);
     game.physics.arcade.overlap(player, cat, this.gameOver);
     game.physics.arcade.overlap(player, apples, this.gameOver);
     game.physics.arcade.overlap(player, birds, this.gameOver);
+    game.physics.arcade.overlap(Bullet, birds, this.killBird);
 
     if (game.time.now > appleTimer)
     {
@@ -182,7 +183,12 @@ var playState = {
   collectAcorn: function(player, acorn) {
     acorn.kill();
     acornCount += 1;
-    acornCountText.text = String(acornCount);
+    acornCountText.text = String("x " + acornCount);
+  },
+
+  killBird: function(Bullet, bird) {
+    bird.kill();
+    bird2.kill();
   },
 
   releaseApple: function() {
@@ -196,7 +202,7 @@ var playState = {
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
 
-    game.add.tween(apple).to({ y: 6600 }, 10000, Phaser.Easing.Linear.None, true);
+    game.add.tween(apple).to({ y: 6600 }, 10, Phaser.Easing.Linear.None, true);
 
     appleTotal++;
     appleTimer = game.time.now + 500;

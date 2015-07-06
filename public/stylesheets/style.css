@@ -118,3 +118,27 @@ form {
   color: red;
   text-align: left;
 }
+
+.myTable, .highTable {
+  visibility: hidden;
+}
+
+table {
+  width: 20%;
+  margin-left: 40%;
+  margin-right: 30%;
+}
+
+thead {
+  background: brown;
+  color: white;
+}
+
+tr, th {
+  height: 5%;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background: lightgrey;
+}
