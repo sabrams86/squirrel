@@ -42,3 +42,4 @@
   var once = true;
   var apples;
   var birds;
+  var bullets;

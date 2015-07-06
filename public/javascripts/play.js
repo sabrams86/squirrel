@@ -83,7 +83,9 @@ var playState = {
     game.physics.arcade.overlap(player, home, this.gameOver);
     game.physics.arcade.overlap(player, home, this.win);
     game.physics.arcade.collide(player, barriers);
-    game.physics.arcade.collide(Bullet, birds);
+    game.physics.arcade.collide(bullets, birds, function(){
+      console.log('asdf');
+    });
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -192,7 +194,7 @@ var playState = {
 
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
-    apple.scale.setTo(.25, .25);
+    apple.scale.setTo(.15, .15);
     apple.checkWorldBounds = true;
     apple.outOfBoundsKill = true;
 
@@ -227,6 +229,13 @@ var playState = {
     game.add.tween(bird2).to({ x: -300 }, 10000, Phaser.Easing.Linear.None, true);
 
     birdTotal++;
+
+  },
+
+  hitBird: function (bullet, bird) {
+
+      bird.kill();
+      bullet.kill();
 
   },
 
