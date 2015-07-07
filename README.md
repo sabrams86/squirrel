@@ -1,5 +1,7 @@
 #Squirrel
 
+'https://pure-fjord-4882.herokuapp.com/'
+
 A fun and thrilling game to help our squirrel buddy get home. Use the WASD keys to move the squirrel and help him dodge birds and apples that are extremely dangerous. You can also collect acorns that can be shot at enemies and improve your overall score.
 
 ###Sign up
